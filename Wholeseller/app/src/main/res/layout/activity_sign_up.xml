@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/padding"
+        android:paddingTop="@dimen/padding"
+        android:paddingEnd="@dimen/padding"
+        android:paddingBottom="@dimen/padding_bottom_activity"
+        tools:context=".activities.SignUpActivity">
+
+        <EditText
+            android:id="@+id/name_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Full Name"
+            android:paddingStart="@dimen/edit_text_padding"
+            android:paddingEnd="@dimen/edit_text_padding"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size"
+            tools:text="Pawan Singh Harariya" />
+
+        <EditText
+            android:id="@+id/mobile_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name_text"
+            android:layout_marginTop="12dp"
+            android:enabled="false"
+            android:hint="Mobile Number"
+            android:paddingStart="@dimen/edit_text_padding"
+            android:paddingEnd="@dimen/edit_text_padding"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size"
+            tools:text="9876543210" />
+
+        <EditText
+            android:id="@+id/email_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mobile_text"
+            android:layout_marginTop="12dp"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="@dimen/edit_text_padding"
+            android:paddingEnd="@dimen/edit_text_padding"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size"
+            tools:text="pawan@gmail.com" />
+
+        <EditText
+            android:id="@+id/address_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/email_text"
+            android:layout_marginTop="12dp"
+            android:hint="Address"
+            android:paddingStart="@dimen/edit_text_padding"
+            android:paddingEnd="@dimen/edit_text_padding"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size"
+            tools:text="Haldwani, Uttrakhand" />
+
+        <EditText
+            android:id="@+id/landmark_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/address_text"
+            android:layout_marginTop="12dp"
+            android:hint="Landmark"
+            android:paddingStart="@dimen/edit_text_padding"
+            android:paddingEnd="@dimen/edit_text_padding"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size"
+            tools:text="Block" />
+
+        <EditText
+            android:id="@+id/pincode_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/landmark_text"
+            android:layout_marginTop="12dp"
+            android:hint="Pincode"
+            android:inputType="number"
+            android:paddingStart="@dimen/edit_text_padding"
+            android:paddingEnd="@dimen/edit_text_padding"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size"
+            tools:text="263139" />
+
+        <EditText
+            android:id="@+id/gst_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pincode_text"
+            android:layout_marginTop="12dp"
+            android:hint="GST Number"
+            android:paddingStart="@dimen/edit_text_padding"
+            android:paddingEnd="@dimen/edit_text_padding"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size"
+            tools:text="A8920789778H110" />
+
+        <EditText
+            android:id="@+id/pan_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/gst_text"
+            android:layout_marginTop="12dp"
+            android:hint="PAN Number"
+            android:paddingStart="@dimen/edit_text_padding"
+            android:paddingEnd="@dimen/edit_text_padding"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size"
+            tools:text="ABH07891J" />
+
+        <EditText
+            android:id="@+id/pick_address_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pan_text"
+            android:layout_marginTop="12dp"
+            android:hint="Pickup Address"
+            android:paddingStart="@dimen/edit_text_padding"
+            android:paddingEnd="@dimen/edit_text_padding"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size"
+            tools:text="Pickup address, Haldwani" />
+
+        <EditText
+            android:id="@+id/return_address_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pick_address_text"
+            android:layout_marginTop="12dp"
+            android:hint="Return Address"
+            android:paddingStart="@dimen/edit_text_padding"
+            android:paddingEnd="@dimen/edit_text_padding"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size"
+            tools:text="Return Address, Haldwani" />
+
+        <Button
+            android:id="@+id/create_profile"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_below="@id/return_address_text"
+            android:layout_marginTop="32dp"
+            android:text="Create Profile"
+            android:textSize="@dimen/button_text_size" />
+
+    </RelativeLayout>
+</ScrollView>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="true"
+    android:elevation="8dp"
+    app:cardCornerRadius="12dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/product_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@color/transparent"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@id/product_image"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="@dimen/large_text_size"
+            android:textStyle="bold"
+            tools:text="Men's Trousers" />
+
+        <TextView
+            android:id="@+id/sku"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/product_name"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_toEndOf="@id/product_image"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="@dimen/text_size"
+            tools:text="JGZ18890JU" />
+
+        <TextView
+            android:id="@+id/order_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sku"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@id/product_image"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="@dimen/text_size"
+            tools:text="Order Value: INR 1200.00" />
+
+        <TextView
+            android:id="@+id/order_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/order_value"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@id/product_image"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="@dimen/text_size"
+            tools:text="Order Quantity: 4000" />
+
+        <TextView
+            android:id="@+id/order_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/product_image"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="@dimen/text_size"
+            tools:text="Ordered At: 14 July, 2020 4:30PM" />
+
+        <Button
+            android:id="@+id/ship_order_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/order_time"
+            android:layout_alignParentEnd="true"
+            android:paddingStart="72dp"
+            android:paddingEnd="72dp"
+            android:text="Ship"
+            android:textAllCaps="false" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

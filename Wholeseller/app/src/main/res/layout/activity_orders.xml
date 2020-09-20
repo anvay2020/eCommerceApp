@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.OrdersActivity">
+
+    <include
+        android:id="@+id/loading"
+        layout="@layout/layout_loading"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/shipping_layout"
+        layout="@layout/layout_ship_order"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/orders_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="@dimen/padding"
+        android:letterSpacing="0.1"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="@dimen/large_text_size"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/orders_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/orders_status"
+        android:layout_marginStart="@dimen/padding"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="@dimen/padding"
+        android:paddingBottom="@dimen/padding_bottom_activity"
+        android:scrollbars="none" />
+</RelativeLayout>
