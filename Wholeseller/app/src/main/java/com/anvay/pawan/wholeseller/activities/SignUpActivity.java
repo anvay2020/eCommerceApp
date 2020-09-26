@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.anvay.pawan.wholeseller.R;
+import com.anvay.pawan.wholeseller.models.SellerDetails;
 import com.anvay.pawan.wholeseller.models.User;
 import com.anvay.pawan.wholeseller.utils.Constants;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -62,12 +63,15 @@ public class SignUpActivity extends AppCompatActivity {
     private void postData() {
         User user = new User(firebaseId, name, email, mobileNumber, address, landmark, pincode, gst, pan, pickAddress, returnAddress);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        SellerDetails sellerDetails = new SellerDetails(firebaseId);
+        db.collection(Constants.SELLER_DETAILS).document(firebaseId).set(sellerDetails);
         db.collection(Constants.USERS_PATH).document(firebaseId).set(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(SignUpActivity.this, "Profile Created", Toast.LENGTH_SHORT).show();
                         editor = sharedPreferences.edit();
+                        editor.putString(Constants.SELLER_NAME, name);
                         editor.putBoolean(Constants.PROFILE_STATUS, true);
                         editor.apply();
                         Intent i = new Intent(SignUpActivity.this, MainActivity.class);

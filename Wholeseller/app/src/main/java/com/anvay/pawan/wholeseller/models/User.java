@@ -3,12 +3,8 @@
  */
 package com.anvay.pawan.wholeseller.models;
 
-import com.anvay.pawan.wholeseller.utils.Constants;
-
 public class User {
-    String userId, name, pincode, address, email, mobile, landmark, gstNumber, panNumber, pickupAddress, returnAddress;
-    double walletBalance;
-    int accountHealth;
+    private String userId, name, pincode, address, email, mobile, landmark, gstNumber, panNumber, pickupAddress, returnAddress;
 
     public User() {
     }
@@ -26,8 +22,6 @@ public class User {
         this.panNumber = panNumber;
         this.pickupAddress = pickupAddress;
         this.returnAddress = returnAddress;
-        this.walletBalance = 0.00;
-        this.accountHealth = Constants.ACCOUNT_ACTIVE;
     }
 
     public String getName() {
@@ -118,19 +112,4 @@ public class User {
         this.returnAddress = returnAddress;
     }
 
-    public double getWalletBalance() {
-        return walletBalance;
-    }
-
-    public void setWalletBalance(double walletBalance) {
-        this.walletBalance = walletBalance;
-    }
-
-    public int getAccountHealth() {
-        return accountHealth;
-    }
-
-    public void setAccountHealth(int accountHealth) {
-        this.accountHealth = accountHealth;
-    }
 }

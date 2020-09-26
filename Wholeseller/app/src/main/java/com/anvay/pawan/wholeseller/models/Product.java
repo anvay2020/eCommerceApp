@@ -4,9 +4,9 @@
 package com.anvay.pawan.wholeseller.models;
 
 public class Product {
-    String id, name, brand, details, category, imageUrl, ownerId, sku, sla, originCountry, mName, mAddress, mContact, parentCategory, childCategory;
-    int stockQuantity, minQuantity, maxQuantity;
-    double price, discount, gst;
+    private String id, name, brand, details, category, imageUrl, ownerId, sku, sla, originCountry, mName, mAddress, mContact, parentCategory, childCategory;
+    private int stockQuantity, minQuantity, maxQuantity;
+    private double price, discount, gst;
 
     public Product() {
         //empty constructor for firebase

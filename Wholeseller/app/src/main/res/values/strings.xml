@@ -3,7 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-
+    <string name="complaint_type_1">Duplicate Product</string>
     <string-array name="gst_rates">
         <item>5</item>
         <item>8</item>
@@ -12,4 +12,10 @@
         <item>24</item>
         <item>28</item>
     </string-array>
+
+    <string-array name="complaint_types">
+        <item>Account Suspended</item>
+        <item>Return Complaints</item>
+    </string-array>
+
 </resources>

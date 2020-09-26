@@ -29,7 +29,7 @@ public class HomeFragment extends Fragment {
     private Context context;
     private String category;
     private CardView clothingCategory;
-    private View layoutMenu;
+    private View layoutMenu, emptyViewMenu;
     private ImageView menuButton;
     private TextView optionAccountHealth, optionContactUs, optionComplaints;
 
@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment {
                 openFragment();
             }
         });
-        layoutMenu.setOnClickListener(new View.OnClickListener() {
+        emptyViewMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 layoutMenu.setVisibility(View.GONE);
@@ -103,5 +103,6 @@ public class HomeFragment extends Fragment {
         optionComplaints = root.findViewById(R.id.option_complaints);
         optionAccountHealth = root.findViewById(R.id.option_account_health);
         menuButton = root.findViewById(R.id.menu_button);
+        emptyViewMenu = root.findViewById(R.id.empty_view_menu);
     }
 }

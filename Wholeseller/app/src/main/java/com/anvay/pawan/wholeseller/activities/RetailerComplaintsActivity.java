@@ -28,14 +28,15 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class ComplaintsActivity extends AppCompatActivity implements ComplaintsAdapter.ComplaintsClickListener {
+public class RetailerComplaintsActivity extends AppCompatActivity implements ComplaintsAdapter.ComplaintsClickListener {
     private ArrayList<Complaint> complaintsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_complaints);
+        setContentView(R.layout.activity_retailer_complaints);
         SharedPreferences sharedPreferences = getSharedPreferences("app", MODE_PRIVATE);
+        int complaintType = getIntent().getIntExtra("complaintType", 0);
         String firebaseId = sharedPreferences.getString(Constants.FIREBASE_ID, null);
         RecyclerView complaintsRecycler = findViewById(R.id.complaints_recycler);
         final TextView noResults = findViewById(R.id.no_results);
@@ -47,7 +48,9 @@ public class ComplaintsActivity extends AppCompatActivity implements ComplaintsA
         complaintsRecycler.setLayoutManager(layoutManager);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         assert firebaseId != null;
-        db.collection(Constants.SELLER_COMPLAINTS_PATH).document(firebaseId).collection(Constants.SELLER_COMPLAINTS_PATH)
+        db.collection(Constants.RETAILER_COMPLAINTS_PATH)
+                .whereEqualTo("sellerId", firebaseId)
+                .whereEqualTo("complaintType", complaintType)
                 .orderBy("time", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -68,7 +71,7 @@ public class ComplaintsActivity extends AppCompatActivity implements ComplaintsA
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ComplaintsActivity.this, "Cannot load complaints", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RetailerComplaintsActivity.this, "Cannot load complaints", Toast.LENGTH_SHORT).show();
                         onBackPressed();
                     }
                 });
@@ -76,8 +79,9 @@ public class ComplaintsActivity extends AppCompatActivity implements ComplaintsA
 
     @Override
     public void OnComplaintsItemClicked(int position) {
-        Intent i = new Intent(ComplaintsActivity.this, ComplaintsDetailsActivity.class);
+        Intent i = new Intent(RetailerComplaintsActivity.this, ComplaintsDetailsActivity.class);
         i.putExtra("complaintId", complaintsList.get(position).getComplaintId());
+        i.putExtra("retailerComplaint", true);
         startActivity(i);
     }
 }

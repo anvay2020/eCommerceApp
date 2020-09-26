@@ -22,6 +22,7 @@ import com.anvay.pawan.wholeseller.models.Order;
 import com.anvay.pawan.wholeseller.utils.Constants;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -69,7 +70,7 @@ public class OrdersActivity extends AppCompatActivity implements OrdersListAdapt
         Log.e("firebaseID", firebaseId);
         Log.e("status", status + "");
         db.collection(Constants.ORDERS_PATH).document(firebaseId).collection(Constants.ORDERS_PATH)
-                .whereEqualTo("status", status)
+                .whereEqualTo("status", status)                                 //ToDO changes for document path
                 .orderBy("orderTime", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -140,6 +141,8 @@ public class OrdersActivity extends AppCompatActivity implements OrdersListAdapt
         Map<String, Object> data = new HashMap<>();
         data.put("trackingId", trackingId);
         data.put("status", Constants.STATUS_SHIPPED);
+        db.collection(Constants.SELLER_DETAILS).document(firebaseId)
+                .update("shippedOrders", FieldValue.increment(1), "pendingOrders", FieldValue.increment(-1));
         db.collection(Constants.ORDERS_PATH).document(firebaseId).collection(Constants.ORDERS_PATH).document(orderId)
                 .update(data)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

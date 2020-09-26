@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="false"
     android:paddingStart="@dimen/padding"
     android:paddingTop="@dimen/padding"
     android:paddingEnd="@dimen/padding"
-    android:paddingBottom="@dimen/padding_bottom_activity"
-    tools:context=".activities.ComplaintsActivity">
+    android:paddingBottom="@dimen/padding_bottom_activity">
 
     <include
         android:id="@+id/loading"
@@ -16,7 +14,7 @@
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/label_complaints"
+        android:id="@+id/complaints_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:letterSpacing="0.1"
@@ -40,7 +38,7 @@
         android:id="@+id/complaints_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/label_complaints"
+        android:layout_below="@id/complaints_category"
         android:layout_marginTop="16dp"
         android:scrollbars="none" />
 </RelativeLayout>

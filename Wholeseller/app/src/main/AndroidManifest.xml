@@ -9,12 +9,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ContactUsActivity"></activity>
-        <activity android:name=".activities.ComplaintsActivity" />
-        <activity android:name=".activities.AccountHealthActivity" />
-        <activity android:name=".activities.ShipOrderActivity" />
-        <activity android:name=".activities.OrderDetailsActivity" />
-        <activity android:name=".activities.OrdersActivity" />
+        <activity
+            android:name=".activities.RetailerComplaintsActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.ComplaintsDetailsActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.ContactUsActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.ComplaintsActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.AccountHealthActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.ShipOrderActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.OrderDetailsActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.OrdersActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activities.ProductDetailsActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
@@ -25,7 +43,7 @@
             android:name=".activities.SignUpActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".activities.SplashScreen"
+            android:name=".activities.SplashScreenActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@style/splash_theme" />
@@ -38,7 +56,6 @@
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

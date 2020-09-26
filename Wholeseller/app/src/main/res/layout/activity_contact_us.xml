@@ -1,9 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:paddingStart="@dimen/padding"
+    android:paddingTop="@dimen/padding"
+    android:paddingEnd="@dimen/padding"
+    android:paddingBottom="@dimen/padding_bottom_activity"
     tools:context=".activities.ContactUsActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        android:id="@+id/loading"
+        layout="@layout/layout_loading"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/title_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Title (250 characters max)"
+        android:textSize="@dimen/small_text_size" />
+
+    <EditText
+        android:id="@+id/title_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_label"
+        android:hint="Title for complaint"
+        android:maxLength="250"
+        android:paddingStart="@dimen/edit_text_padding"
+        android:paddingEnd="@dimen/edit_text_padding"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size" />
+
+    <TextView
+        android:id="@+id/type_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_text"
+        android:layout_marginTop="18dp"
+        android:text="Complaint Type"
+        android:textSize="@dimen/small_text_size" />
+
+    <Spinner
+        android:id="@+id/type_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/type_label"
+        android:dropDownSelector="@color/black"
+        android:entries="@array/complaint_types" />
+
+    <TextView
+        android:id="@+id/message_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/type_spinner"
+        android:layout_marginTop="18dp"
+        android:text="Description"
+        android:textSize="@dimen/small_text_size" />
+
+    <EditText
+        android:id="@+id/message_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/message_label"
+        android:maxHeight="200dp"
+        android:paddingStart="@dimen/edit_text_padding"
+        android:paddingEnd="@dimen/edit_text_padding"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size" />
+
+    <Button
+        android:id="@+id/finish_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="16dp"
+        android:text="Finish"
+        android:textSize="@dimen/button_text_size" />
+</RelativeLayout>

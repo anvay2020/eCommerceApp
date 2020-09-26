@@ -8,15 +8,18 @@
     android:orientation="horizontal">
 
     <View
+        android:id="@+id/empty_view_menu"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:clickable="true" />
 
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="3"
         android:background="@color/white"
+        android:clickable="true"
         android:clipToPadding="false"
         android:paddingStart="@dimen/padding"
         android:paddingTop="48dp"
@@ -24,7 +27,7 @@
 
         <TextView
             android:id="@+id/option_account_health"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
@@ -42,7 +45,7 @@
 
         <TextView
             android:id="@+id/option_complaints"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/option_account_health"
             android:layout_marginTop="24dp"
@@ -62,7 +65,7 @@
 
         <TextView
             android:id="@+id/option_contact_us"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/option_complaints"
             android:layout_marginTop="24dp"

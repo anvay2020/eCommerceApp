@@ -1,6 +1,5 @@
 package com.anvay.pawan.wholeseller.activities;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -26,8 +25,6 @@ import java.util.Objects;
 public class OrderDetailsActivity extends AppCompatActivity {
     private TextView productName, productId, orderedId, transactionId, sku, orderValue, orderQuantity, orderTime, customerName, customerAddress,
             customerContact;
-    private int status;
-    private String orderId;
     private Button shipOrderButton;
     private View loading;
 
@@ -39,7 +36,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
         loading.setVisibility(View.VISIBLE);
         SharedPreferences sharedPreferences = getSharedPreferences("app", MODE_PRIVATE);
         String firebaseId = sharedPreferences.getString(Constants.FIREBASE_ID, null);
-        orderId = Objects.requireNonNull(getIntent().getExtras()).getString("orderId");
+        String orderId = Objects.requireNonNull(getIntent().getExtras()).getString("orderId");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         assert orderId != null;
         assert firebaseId != null;
@@ -64,7 +61,6 @@ public class OrderDetailsActivity extends AppCompatActivity {
                         customerName.setText(order.getCustomerName());
                         customerAddress.setText(order.getCustomerAddress());
                         customerContact.setText(order.getCustomerContact());
-                        status = order.getStatus();
                         loading.setVisibility(View.GONE);
                     }
                 })
