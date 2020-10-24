@@ -48,7 +48,7 @@ public class AccountHealthActivity extends AppCompatActivity {
                         SellerDetails sellerDetails = documentSnapshot.toObject(SellerDetails.class);
                         assert sellerDetails != null;
                         accountHealth = sellerDetails.getAccountHealth();
-                        type1.setText(sellerDetails.getComplaintType1());
+                        type1.setText(String.valueOf(sellerDetails.getComplaintType1()));
                         setDetails();
                     }
                 })
@@ -56,7 +56,7 @@ public class AccountHealthActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(AccountHealthActivity.this, "Failed to load account heath", Toast.LENGTH_LONG).show();
-                        onBackPressed();
+                        loading.setVisibility(View.GONE);
                     }
                 });
         complaintType1.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +68,7 @@ public class AccountHealthActivity extends AppCompatActivity {
         accountHealthSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (v.isSelected())
+                if (accountHealthSwitch.isChecked())
                     changeDetails(Constants.ACCOUNT_ACTIVE);
                 else
                     changeDetails(Constants.ACCOUNT_INACTIVE);
@@ -80,7 +80,6 @@ public class AccountHealthActivity extends AppCompatActivity {
         Intent i = new Intent(AccountHealthActivity.this, RetailerComplaintsActivity.class);
         i.putExtra("complaintType", complaintType);
         startActivity(i);
-
     }
 
     private void changeDetails(final int status) {
@@ -114,11 +113,11 @@ public class AccountHealthActivity extends AppCompatActivity {
             accountHealthSwitch.setEnabled(false);
             accountHealthText.setText("Your account has been suspended");
         } else if (accountHealth == Constants.ACCOUNT_ACTIVE) {
-            accountHealthSwitch.setSelected(true);
+            accountHealthSwitch.setChecked(true);
             accountHealthSwitch.setEnabled(true);
             accountHealthText.setText("Your account is active");
         } else if (accountHealth == Constants.ACCOUNT_INACTIVE) {
-            accountHealthSwitch.setSelected(false);
+            accountHealthSwitch.setChecked(false);
             accountHealthSwitch.setEnabled(true);
             accountHealthText.setText("Your account is inactive");
         }

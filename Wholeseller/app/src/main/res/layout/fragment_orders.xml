@@ -1,250 +1,272 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:clipToPadding="false"
-    android:paddingStart="@dimen/padding"
-    android:paddingTop="@dimen/padding"
-    android:paddingEnd="@dimen/padding"
-    android:paddingBottom="@dimen/padding_bottom_fragment">
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/loading"
         layout="@layout/layout_loading"
         android:visibility="gone" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/sales_label"
-        android:layout_width="170dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="32dp"
-        android:clipToPadding="true"
-        android:elevation="12dp"
-        app:cardCornerRadius="16dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingStart="@dimen/padding"
+            android:paddingTop="@dimen/padding"
+            android:paddingEnd="@dimen/padding"
+            android:paddingBottom="@dimen/padding_bottom_fragment">
 
             <TextView
-                android:id="@+id/total_sales"
-                android:layout_width="wrap_content"
+                android:id="@+id/add_bank_details"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:text="12500.40"
-                android:textColor="@color/black"
-                android:textSize="32sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/total_sales"
-                android:layout_centerHorizontal="true"
+                android:layout_below="@id/sales_label"
+                android:layout_marginTop="12dp"
                 android:gravity="center"
-                android:text="Total\nSales"
-                android:textColor="@color/black"
-                android:textSize="22sp" />
+                android:text="Click here to add your bank details and receive regular payouts."
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/sales_label"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="32dp"
+                android:clipToPadding="true"
+                android:elevation="12dp"
+                app:cardCornerRadius="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/total_sales"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="16dp"
+                        android:text="0.00"
+                        android:textColor="@color/black"
+                        android:textSize="32sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/total_sales"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:text="Total\nSales"
+                        android:textColor="@color/black"
+                        android:textSize="22sp" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/wallet_label"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_toEndOf="@id/sales_label"
+                android:clipToPadding="true"
+                android:elevation="12dp"
+                app:cardCornerRadius="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/wallet_balance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="16dp"
+                        android:text="0.00"
+                        android:textColor="@color/black"
+                        android:textSize="32sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/wallet_balance"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:text="Wallet\nBalance"
+                        android:textColor="@color/black"
+                        android:textSize="22sp" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/pending_orders"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_below="@id/add_bank_details"
+                android:layout_marginTop="32dp"
+                android:clipToPadding="true"
+                android:elevation="12dp"
+                app:cardBackgroundColor="@color/colorAccent"
+                app:cardCornerRadius="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/no_pending_orders"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="16dp"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:textSize="40sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/no_pending_orders"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:text="Pending\nOrders"
+                        android:textColor="@color/black"
+                        android:textSize="22sp" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/shipped_orders"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_below="@id/add_bank_details"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_toEndOf="@id/pending_orders"
+                android:clipToPadding="true"
+                android:elevation="12dp"
+                app:cardBackgroundColor="@color/colorAccent"
+                app:cardCornerRadius="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/no_shipped_orders"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="16dp"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:textSize="40sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/no_shipped_orders"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:text="Shipped\nOrders"
+                        android:textColor="@color/black"
+                        android:textSize="22sp" />
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/completed_orders"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_below="@id/pending_orders"
+                android:layout_marginTop="32dp"
+                android:clipToPadding="true"
+
+                android:elevation="12dp"
+                app:cardBackgroundColor="@color/colorAccent"
+                app:cardCornerRadius="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/no_completed_orders"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="16dp"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:textSize="40sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/no_completed_orders"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:text="Completed\nOrders"
+                        android:textColor="@color/black"
+                        android:textSize="22sp" />
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/returned_orders"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_below="@id/shipped_orders"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_toEndOf="@id/completed_orders"
+                android:clipToPadding="true"
+                android:elevation="12dp"
+                app:cardBackgroundColor="@color/colorAccent"
+                app:cardCornerRadius="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/no_returned_orders"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="16dp"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:textSize="40sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/no_returned_orders"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:text="Returned\nOrders"
+                        android:textColor="@color/black"
+                        android:textSize="22sp" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
         </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/wallet_label"
-        android:layout_width="170dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_toEndOf="@id/sales_label"
-        android:clipToPadding="true"
-        android:elevation="12dp"
-        app:cardCornerRadius="16dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/wallet_balance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:text="300.00"
-                android:textColor="@color/black"
-                android:textSize="32sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/wallet_balance"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:text="Pending\nOrders"
-                android:textColor="@color/black"
-                android:textSize="22sp" />
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/pending_orders"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_below="@id/sales_label"
-        android:layout_marginTop="32dp"
-        android:clipToPadding="true"
-        android:elevation="12dp"
-        app:cardBackgroundColor="@color/colorAccent"
-        app:cardCornerRadius="16dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/no_pending_orders"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:text="0"
-                android:textColor="@color/black"
-                android:textSize="40sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/no_pending_orders"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:text="Pending\nOrders"
-                android:textColor="@color/black"
-                android:textSize="22sp" />
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/shipped_orders"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_below="@id/wallet_label"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_toEndOf="@id/pending_orders"
-        android:clipToPadding="true"
-        android:elevation="12dp"
-        app:cardBackgroundColor="@color/colorAccent"
-        app:cardCornerRadius="16dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/no_shipped_orders"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:text="0"
-                android:textColor="@color/black"
-                android:textSize="40sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/no_shipped_orders"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:text="Shipped\nOrders"
-                android:textColor="@color/black"
-                android:textSize="22sp" />
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/completed_orders"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_below="@id/pending_orders"
-        android:layout_marginTop="32dp"
-        android:clipToPadding="true"
-
-        android:elevation="12dp"
-        app:cardBackgroundColor="@color/colorAccent"
-        app:cardCornerRadius="16dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/no_completed_orders"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:text="0"
-                android:textColor="@color/black"
-                android:textSize="40sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/no_completed_orders"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:text="Completed\nOrders"
-                android:textColor="@color/black"
-                android:textSize="22sp" />
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/returned_orders"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_below="@id/shipped_orders"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_toEndOf="@id/completed_orders"
-        android:clipToPadding="true"
-        android:elevation="12dp"
-        app:cardBackgroundColor="@color/colorAccent"
-        app:cardCornerRadius="16dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/no_returned_orders"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:text="0"
-                android:textColor="@color/black"
-                android:textSize="40sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/no_returned_orders"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:text="Returned\nOrders"
-                android:textColor="@color/black"
-                android:textSize="22sp" />
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-</RelativeLayout>
+    </ScrollView>
+</FrameLayout>

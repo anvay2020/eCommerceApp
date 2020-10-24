@@ -29,6 +29,7 @@ public class SignUpActivity extends AppCompatActivity {
     private Button createProfile;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+    private View loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void postData() {
+        loading.setVisibility(View.VISIBLE);
         User user = new User(firebaseId, name, email, mobileNumber, address, landmark, pincode, gst, pan, pickAddress, returnAddress);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         SellerDetails sellerDetails = new SellerDetails(firebaseId);
@@ -83,6 +85,7 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(SignUpActivity.this, "Unknown Error", Toast.LENGTH_SHORT).show();
+                        loading.setVisibility(View.GONE);
                     }
                 });
     }
@@ -97,6 +100,7 @@ public class SignUpActivity extends AppCompatActivity {
         returnAddressText = findViewById(R.id.return_address_text);
         gstText = findViewById(R.id.gst_text);
         panText = findViewById(R.id.pan_text);
+        loading = findViewById(R.id.loading);
         mobileText = findViewById(R.id.mobile_text);
         createProfile = findViewById(R.id.create_profile);
     }

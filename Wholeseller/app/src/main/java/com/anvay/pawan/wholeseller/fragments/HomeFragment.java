@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.anvay.pawan.wholeseller.R;
 import com.anvay.pawan.wholeseller.activities.AccountHealthActivity;
+import com.anvay.pawan.wholeseller.activities.BankDetailsActivity;
 import com.anvay.pawan.wholeseller.activities.ComplaintsActivity;
 import com.anvay.pawan.wholeseller.activities.ContactUsActivity;
 import com.anvay.pawan.wholeseller.utils.Constants;
@@ -31,7 +32,7 @@ public class HomeFragment extends Fragment {
     private CardView clothingCategory;
     private View layoutMenu, emptyViewMenu;
     private ImageView menuButton;
-    private TextView optionAccountHealth, optionContactUs, optionComplaints;
+    private TextView optionAccountHealth, optionContactUs, optionComplaints, optionBankDetails;
 
     public HomeFragment(Context context) {
         this.context = context;
@@ -81,6 +82,13 @@ public class HomeFragment extends Fragment {
                 startActivity(i);
             }
         });
+        optionBankDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, BankDetailsActivity.class);
+                startActivity(i);
+            }
+        });
         return root;
     }
 
@@ -102,6 +110,7 @@ public class HomeFragment extends Fragment {
         optionContactUs = root.findViewById(R.id.option_contact_us);
         optionComplaints = root.findViewById(R.id.option_complaints);
         optionAccountHealth = root.findViewById(R.id.option_account_health);
+        optionBankDetails = root.findViewById(R.id.option_bank_details);
         menuButton = root.findViewById(R.id.menu_button);
         emptyViewMenu = root.findViewById(R.id.empty_view_menu);
     }

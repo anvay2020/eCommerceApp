@@ -1,3 +1,6 @@
+/**
+ * coded by Pawan Singh Harariya
+ */
 package com.anvay.pawan.wholeseller.activities;
 
 import android.content.SharedPreferences;
@@ -24,7 +27,7 @@ import java.util.Objects;
 
 public class OrderDetailsActivity extends AppCompatActivity {
     private TextView productName, productId, orderedId, transactionId, sku, orderValue, orderQuantity, orderTime, customerName, customerAddress,
-            customerContact;
+            customerContact, trackingId;
     private Button shipOrderButton;
     private View loading;
 
@@ -40,7 +43,8 @@ public class OrderDetailsActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         assert orderId != null;
         assert firebaseId != null;
-        db.collection(Constants.ORDERS_PATH).document(firebaseId).collection(Constants.ORDERS_PATH).document(orderId)
+        db.collection(Constants.ORDERS_PATH)
+                .document(orderId)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -49,7 +53,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
                         assert order != null;
                         productName.setText(order.getProductName());
                         productId.setText(order.getProductId());
-                        orderedId.setText(order.getOrderId());
+                        orderedId.setText(documentSnapshot.getId());
                         transactionId.setText(order.getTransactionId());
                         sku.setText(order.getSku());
                         orderValue.setText(order.getOrderValue());
@@ -61,6 +65,8 @@ public class OrderDetailsActivity extends AppCompatActivity {
                         customerName.setText(order.getCustomerName());
                         customerAddress.setText(order.getCustomerAddress());
                         customerContact.setText(order.getCustomerContact());
+                        if (order.getStatus() != Constants.STATUS_PENDING)
+                            trackingId.setText(order.getTrackingId());
                         loading.setVisibility(View.GONE);
                     }
                 })
@@ -71,20 +77,13 @@ public class OrderDetailsActivity extends AppCompatActivity {
                         Toast.makeText(OrderDetailsActivity.this, "Unknown Error", Toast.LENGTH_SHORT).show();
                     }
                 });
-//        shipOrderButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(OrderDetailsActivity.this, ShipOrderActivity.class);
-//                i.putExtra("orderId", orderId);
-//                startActivity(i);
-//            }
-//        });
     }
 
     private void getUI() {
         productName = findViewById(R.id.product_name);
         productId = findViewById(R.id.product_id);
         orderedId = findViewById(R.id.order_id);
+        trackingId = findViewById(R.id.tracking_id_text);
         transactionId = findViewById(R.id.transaction_id);
         sku = findViewById(R.id.sku);
         orderValue = findViewById(R.id.order_value);

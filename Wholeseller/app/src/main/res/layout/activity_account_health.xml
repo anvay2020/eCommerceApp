@@ -29,6 +29,7 @@
         android:id="@+id/account_health_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:checked="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="16dp" />
 
@@ -39,7 +40,7 @@
         android:layout_below="@id/account_health_label"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Your account is active"
+        android:text="Account status"
         android:textColor="@color/black"
         android:textSize="16sp" />
 
@@ -61,7 +62,7 @@
         android:layout_below="@id/complaints_label"
         android:layout_marginTop="16dp"
         android:padding="12dp"
-        android:text="@string/complaint_type_1"
+        android:text="@string/retailer_complaint0"
         android:textColor="@color/black"
         android:textSize="18sp" />
 

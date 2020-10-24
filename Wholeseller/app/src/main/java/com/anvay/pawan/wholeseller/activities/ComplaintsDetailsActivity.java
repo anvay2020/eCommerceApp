@@ -34,6 +34,7 @@ import java.util.Objects;
 
 public class ComplaintsDetailsActivity extends AppCompatActivity {
     private ArrayList<Message> messages = new ArrayList<>();
+    private ComplaintsMessageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +51,13 @@ public class ComplaintsDetailsActivity extends AppCompatActivity {
         final boolean isRetailerComplaint = getIntent().getBooleanExtra("retailerComplaint", false);
         SharedPreferences sharedPreferences = getSharedPreferences("app", MODE_PRIVATE);
         final String firebaseId = sharedPreferences.getString(Constants.FIREBASE_ID, null);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(ComplaintsDetailsActivity.this);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        messagesRecycler.setLayoutManager(layoutManager);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         assert firebaseId != null;
         assert complaintId != null;
-        final ComplaintsMessageAdapter adapter = new ComplaintsMessageAdapter(ComplaintsDetailsActivity.this, messages, isRetailerComplaint);
         DocumentReference docRef;
         if (isRetailerComplaint)
             docRef = db.collection(Constants.RETAILER_COMPLAINTS_PATH).document(complaintId);
@@ -66,19 +70,36 @@ public class ComplaintsDetailsActivity extends AppCompatActivity {
                         Complaint complaint = documentSnapshot.toObject(Complaint.class);
                         assert complaint != null;
                         complaintTitle.setText(complaint.getTitle());
-                        complaintCategory.setText(complaint.getComplaintType());
+                        if (!isRetailerComplaint) {
+                            int complaintType = complaint.getComplaintType();
+                            String complaintTypeText = "";
+                            switch (complaintType) {
+                                case 0:
+                                    complaintTypeText = getString(R.string.seller_complaint0);
+                                    break;
+                                case 1:
+                                    complaintTypeText = getString(R.string.seller_complaint1);
+                                    break;
+                                case 2:
+                                    complaintTypeText = getString(R.string.seller_complaint2);
+                                    break;
+                                case 3:
+                                    complaintTypeText = getString(R.string.seller_complaint3);
+                                    break;
+                            }
+                            complaintCategory.setText(complaintTypeText);
+                        }
                         messages = complaint.getMessages();
-                        LinearLayoutManager layoutManager = new LinearLayoutManager(ComplaintsDetailsActivity.this);
-                        layoutManager.setReverseLayout(true);
-                        layoutManager.setStackFromEnd(true);
-                        messagesRecycler.setLayoutManager(layoutManager);
+                        adapter = new ComplaintsMessageAdapter(ComplaintsDetailsActivity.this, messages, isRetailerComplaint);
                         messagesRecycler.setAdapter(adapter);
+                        loading.setVisibility(View.GONE);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(ComplaintsDetailsActivity.this, "Cannot load messages", Toast.LENGTH_LONG).show();
+                        loading.setVisibility(View.GONE);
                         onBackPressed();
                     }
                 });
@@ -100,7 +121,7 @@ public class ComplaintsDetailsActivity extends AppCompatActivity {
                     docRef = db.collection(Constants.RETAILER_COMPLAINTS_PATH).document(complaintId);
                 else
                     docRef = db.collection(Constants.SELLER_COMPLAINTS_PATH).document(firebaseId).collection(Constants.SELLER_COMPLAINTS_PATH).document(complaintId);
-                docRef.set(FieldValue.arrayUnion("messages", message))
+                docRef.update("messages", FieldValue.arrayUnion(message), "time", FieldValue.serverTimestamp())
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {

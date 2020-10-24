@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/type_label"
         android:dropDownSelector="@color/black"
-        android:entries="@array/complaint_types" />
+        android:entries="@array/seller_complaints" />
 
     <TextView
         android:id="@+id/message_label"
@@ -66,7 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/message_label"
-        android:maxHeight="200dp"
+        android:maxHeight="240dp"
         android:paddingStart="@dimen/edit_text_padding"
         android:paddingEnd="@dimen/edit_text_padding"
         android:textColor="@color/black"

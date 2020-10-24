@@ -6,6 +6,7 @@ package com.anvay.pawan.wholeseller.activities;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,6 +47,7 @@ public class ContactUsActivity extends AppCompatActivity {
                 String title = titleText.getText().toString();
                 String message = messageText.getText().toString();
                 int type = typeSpinner.getSelectedItemPosition();
+                Log.e("complaintType", "" + type);
                 if (TextUtils.isEmpty(title) || TextUtils.isEmpty(message))
                     Toast.makeText(ContactUsActivity.this, "Fill all details", Toast.LENGTH_SHORT).show();
                 else

@@ -23,11 +23,13 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Co
     private Context context;
     private ArrayList<Complaint> complaints;
     private ComplaintsClickListener complaintsClickListener;
+    private boolean isRetailerComplaint;
 
-    public ComplaintsAdapter(Context context, ArrayList<Complaint> complaints, ComplaintsClickListener complaintsClickListener) {
+    public ComplaintsAdapter(Context context, ArrayList<Complaint> complaints, ComplaintsClickListener complaintsClickListener, boolean isRetailerComplaint) {
         this.context = context;
         this.complaints = complaints;
         this.complaintsClickListener = complaintsClickListener;
+        this.isRetailerComplaint = isRetailerComplaint;
     }
 
     @NonNull
@@ -61,7 +63,27 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Co
         public void bind(int position) {
             Complaint complaint = complaints.get(position);
             complaintTitle.setText(complaint.getTitle());
-            complaintCategory.setText(complaint.getComplaintType());
+            if (isRetailerComplaint)
+                complaintCategory.setVisibility(View.GONE);
+            else {
+                int complaintType = complaint.getComplaintType();
+                String complaintTypeText = "";
+                switch (complaintType) {
+                    case 0:
+                        complaintTypeText = context.getResources().getString(R.string.seller_complaint0);
+                        break;
+                    case 1:
+                        complaintTypeText = context.getResources().getString(R.string.seller_complaint1);
+                        break;
+                    case 2:
+                        complaintTypeText = context.getResources().getString(R.string.seller_complaint2);
+                        break;
+                    case 3:
+                        complaintTypeText = context.getResources().getString(R.string.seller_complaint3);
+                        break;
+                }
+                complaintCategory.setText(complaintTypeText);
+            }
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(complaint.getTime().getSeconds() * 1000);
             String dateString = DateFormat.format("dd-MM-yyyy", calendar).toString();

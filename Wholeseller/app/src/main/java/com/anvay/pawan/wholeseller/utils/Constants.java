@@ -8,7 +8,9 @@ public class Constants {
             MOBILE_NUMBER = "mobileNumber",
             LOGIN_STATUS = "loginStatus",
             PROFILE_STATUS = "profileStatus",
+            BANK_DETAILS_STATUS = "bankDetails",
             SELLER_NAME = "sellerName";
+
     public static final int
             STATUS_PENDING = 0,
             STATUS_SHIPPED = 1,
@@ -25,9 +27,8 @@ public class Constants {
             USERS_PATH = "wholesellers",
             ORDERS_PATH = "orders",
             INACTIVE_SELLERS_PATH = "inactiveSellers",
-            SELLER_COMPLAINTS_PATH = "sellerComplaints",
+            SELLER_COMPLAINTS_PATH = "sellerIssues",
             RETAILER_COMPLAINTS_PATH = "retailerComplaints",
-            SELLER_DETAILS = "sellerDetails";
-    public static int
-            COMPLAINT_DUPLICATE = 1;
+            SELLER_DETAILS = "sellerDetails",
+            BANK_DETAILS_PATH = "sellerBankDetails";
 }
