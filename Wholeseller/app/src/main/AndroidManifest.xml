@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activities.BankDetailsActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
             android:name=".activities.RetailerComplaintsActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
@@ -17,15 +20,12 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activities.ContactUsActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".activities.ComplaintsActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activities.AccountHealthActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity
-            android:name=".activities.ShipOrderActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activities.OrderDetailsActivity"
@@ -56,6 +56,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

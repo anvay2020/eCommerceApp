@@ -6,6 +6,7 @@ package com.anvay.pawan.wholeseller.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,7 +41,7 @@ public class ComplaintsActivity extends AppCompatActivity implements ComplaintsA
         RecyclerView complaintsRecycler = findViewById(R.id.complaints_recycler);
         final TextView noResults = findViewById(R.id.no_results);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        final ComplaintsAdapter adapter = new ComplaintsAdapter(this, complaintsList, this);
+        final ComplaintsAdapter adapter = new ComplaintsAdapter(this, complaintsList, this,false);
         final View loading = findViewById(R.id.loading);
         complaintsRecycler.setAdapter(adapter);
         loading.setVisibility(View.VISIBLE);

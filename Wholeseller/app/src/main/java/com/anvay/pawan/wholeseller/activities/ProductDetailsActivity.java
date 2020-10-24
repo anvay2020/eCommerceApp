@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,7 +45,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private String category, productId, firebaseId, name, brand, details, sla, origin,
             mName, mAddress, mContact, parentCat, childCat;
     private int stockQuantity, minQuantity, maxQuantity;
-    private double price, gst, discount = 0.00;
+    private double price, gst, discount = 0.00, gst_text;
     private EditText nameText, brandText, priceText, stockQuantityText, detailsText, discountText, skuText, slaText, originText, gstText,
             mNameText, mAddressText, mContactText, parentText, childText, minQuantityText, maxQuantityText;
     private Spinner gstSpinner;
@@ -53,7 +54,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private final int CAMERA = 8001;
     private Button editButton, deleteButton;
     private Bitmap newImage;
-    private View editImage;
+    private View editImage, loading;
     private boolean isEditEnabled = false;
 
     @Override
@@ -68,6 +69,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         category = bundle.getString(Constants.CATEGORY_KEY);
         productId = bundle.getString(Constants.PRODUCT_ID_KEY);
         loadProductDetails();
+        loading.setVisibility(View.VISIBLE);
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,6 +129,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     //todo add alert dialog for confirmation
     private void deleteProduct() {
+        loading.setVisibility(View.VISIBLE);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection(Constants.PRODUCTS_PATH + "/" + category).document(productId).delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -140,11 +143,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(ProductDetailsActivity.this, "Unknown Error", Toast.LENGTH_SHORT).show();
+                        loading.setVisibility(View.GONE);
                     }
                 });
     }
 
     private void saveChanges() {
+        loading.setVisibility(View.VISIBLE);
         Map<String, Object> data = new HashMap<>();
         data.put("name", name);
         data.put("brand", brand);
@@ -169,12 +174,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(ProductDetailsActivity.this, "Changes Saved", Toast.LENGTH_SHORT).show();
                         changeEdit(false);
+                        loading.setVisibility(View.GONE);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(ProductDetailsActivity.this, "Error uploading data", Toast.LENGTH_SHORT).show();
+                        loading.setVisibility(View.GONE);
                     }
                 });
     }
@@ -194,21 +201,35 @@ public class ProductDetailsActivity extends AppCompatActivity {
         mContactText.setEnabled(b);
         mAddressText.setEnabled(b);
         maxQuantityText.setEnabled(b);
+        gstSpinner.setSelected(b);
         slaText.setEnabled(b);
         parentText.setEnabled(b);
         childText.setEnabled(b);
         if (b) {
             gstSpinner.setVisibility(View.VISIBLE);
-            gstSpinner.setSelected(false);
+            int selectedIndex = -1;
+            if (gst_text == Double.parseDouble(getString(R.string.gst_item0)))
+                selectedIndex = 0;
+            else if (gst_text == Double.parseDouble(getString(R.string.gst_item1)))
+                selectedIndex = 1;
+            else if (gst_text == Double.parseDouble(getString(R.string.gst_item2)))
+                selectedIndex = 2;
+            else if (gst_text == Double.parseDouble(getString(R.string.gst_item3)))
+                selectedIndex = 3;
+            else if (gst_text == Double.parseDouble(getString(R.string.gst_item4)))
+                selectedIndex = 4;
+            else if (gst_text == Double.parseDouble(getString(R.string.gst_item5)))
+                selectedIndex = 5;
+            gstSpinner.setSelection(selectedIndex);
             gstText.setVisibility(View.INVISIBLE);
             editImage.setVisibility(View.VISIBLE);
-            editButton.setText("save");
+            editButton.setText("Save");
         } else {
             gstSpinner.setVisibility(View.INVISIBLE);
             gstText.setVisibility(View.VISIBLE);
             gstText.setText(String.valueOf(gst));
             editImage.setVisibility(View.INVISIBLE);
-            editButton.setText("edit");
+            editButton.setText("Edit");
         }
     }
 
@@ -229,6 +250,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         maxQuantityText.setText(String.valueOf(product.getMaxQuantity()));
                         detailsText.setText(product.getDetails());
                         gstText.setText(String.valueOf(product.getGst()));
+                        gst_text = product.getGst();
                         discountText.setText(String.valueOf(product.getDiscount()));
                         skuText.setText(product.getSku());
                         slaText.setText(product.getsla());
@@ -238,12 +260,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         mContactText.setText(product.getmContact());
                         parentText.setText(product.getParentCategory());
                         childText.setText(product.getChildCategory());
+                        loading.setVisibility(View.GONE);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(ProductDetailsActivity.this, "Error getting data", Toast.LENGTH_SHORT).show();
+                        loading.setVisibility(View.GONE);
                     }
                 });
     }
@@ -311,6 +335,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
     private void saveImage() {
+        loading.setVisibility(View.VISIBLE);
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
         StorageReference spaceRef = storageReference.child(firebaseId);
@@ -329,6 +354,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(ProductDetailsActivity.this, "Upload Failed" + e.getMessage() + e.getCause(), Toast.LENGTH_LONG).show();
+                loading.setVisibility(View.GONE);
             }
         });
     }
@@ -356,5 +382,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
         editImage = findViewById(R.id.edit_image);
         editButton = findViewById(R.id.edit_button);
         deleteButton = findViewById(R.id.delete_button);
+        loading = findViewById(R.id.loading);
     }
 }

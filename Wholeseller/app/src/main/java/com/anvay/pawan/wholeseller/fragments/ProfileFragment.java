@@ -34,7 +34,7 @@ public class ProfileFragment extends Fragment {
     private EditText nameText, emailText, addressText, pincodeText, landmarkText, pickAddressText, returnAddressText, gstText, panText, mobileText;
     private String firebaseId, name, email, address, pincode, landmark, pickAddress, returnAddress;
     private Button editProfile;
-    private View view;
+    private View view, loading;
     private boolean isEditEnabled = false;
 
     public ProfileFragment(Context context) {
@@ -48,6 +48,7 @@ public class ProfileFragment extends Fragment {
         getUI();
         SharedPreferences sharedPreferences = context.getSharedPreferences("app", Context.MODE_PRIVATE);
         firebaseId = sharedPreferences.getString(Constants.FIREBASE_ID, null);
+        loading.setVisibility(View.VISIBLE);
         loadProfile();
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,17 +106,20 @@ public class ProfileFragment extends Fragment {
                         returnAddressText.setText(user.getReturnAddress());
                         gstText.setText(user.getGstNumber());
                         panText.setText(user.getPanNumber());
+                        loading.setVisibility(View.GONE);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(context, "Cannot load profile", Toast.LENGTH_SHORT).show();
+                        loading.setVisibility(View.GONE);
                     }
                 });
     }
 
     private void postData() {
+        loading.setVisibility(View.VISIBLE);
         Map<String, Object> data = new HashMap<>();
         data.put("name", name);
         data.put("email", email);
@@ -131,12 +135,14 @@ public class ProfileFragment extends Fragment {
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(context, "Profile Updated", Toast.LENGTH_SHORT).show();
                         changeEdit(false);
+                        loading.setVisibility(View.GONE);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT).show();
+                        loading.setVisibility(View.GONE);
                     }
                 });
     }
@@ -153,5 +159,6 @@ public class ProfileFragment extends Fragment {
         panText = view.findViewById(R.id.pan_text);
         mobileText = view.findViewById(R.id.mobile_text);
         editProfile = view.findViewById(R.id.edit_profile);
+        loading = view.findViewById(R.id.loading);
     }
 }

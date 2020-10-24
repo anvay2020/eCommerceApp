@@ -1,21 +1,33 @@
 <resources>
     <string name="app_name">Wholeseller</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="complaint_type_1">Duplicate Product</string>
+
+    <string name="gst_item0">5.0</string>
+    <string name="gst_item1">8.0</string>
+    <string name="gst_item2">12.0</string>
+    <string name="gst_item3">18.0</string>
+    <string name="gst_item4">24.0</string>
+    <string name="gst_item5">28.0</string>
     <string-array name="gst_rates">
-        <item>5</item>
-        <item>8</item>
-        <item>12</item>
-        <item>18</item>
-        <item>24</item>
-        <item>28</item>
+        <item>@string/gst_item0</item>
+        <item>@string/gst_item1</item>
+        <item>@string/gst_item2</item>
+        <item>@string/gst_item3</item>
+        <item>@string/gst_item4</item>
+        <item>@string/gst_item5</item>
     </string-array>
 
-    <string-array name="complaint_types">
-        <item>Account Suspended</item>
-        <item>Return Complaints</item>
+    <string name="seller_complaint0">Account Suspended</string>
+    <string name="seller_complaint1">Payout Not Received</string>
+    <string name="seller_complaint2">Delete My Account</string>
+    <string name="seller_complaint3">Other</string>
+    <string-array name="seller_complaints">
+        <item>@string/seller_complaint0</item>
+        <item>@string/seller_complaint1</item>
+        <item>@string/seller_complaint2</item>
+        <item>@string/seller_complaint3</item>
     </string-array>
 
+    <string name="retailer_complaint0">Duplicate Product</string>
+    <string name="retailer_complaint1">Order Not Shipped</string>
+    <string name="retailer_complaint2">Damaged Product</string>
 </resources>

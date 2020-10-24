@@ -1,454 +1,465 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbars="none">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <include
+        android:id="@+id/loading"
+        layout="@layout/layout_loading"
+        android:visibility="gone" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:clipToPadding="false"
-        android:paddingStart="@dimen/padding"
-        android:paddingTop="@dimen/padding"
-        android:paddingEnd="@dimen/padding"
-        android:paddingBottom="@dimen/padding_bottom_activity"
-        tools:context=".activities.AddProductActivity">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-        <TextView
-            android:id="@+id/image_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Image of Product"
-            android:textSize="@dimen/small_text_size" />
-
-        <ImageView
-            android:id="@+id/image_view"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_below="@id/image_label"
-            android:layout_marginStart="-16dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="-16dp"
-            android:scaleType="fitCenter" />
-
-        <View
-            android:id="@+id/edit_image"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_below="@id/image_label"
-            android:layout_marginStart="-16dp"
-            android:layout_marginEnd="-16dp"
-            android:background="@color/transparent"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/name_label"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/image_view"
             android:layout_marginTop="16dp"
-            android:text="Title of Product"
-            android:textSize="@dimen/small_text_size" />
+            android:clipToPadding="false"
+            android:paddingStart="@dimen/padding"
+            android:paddingTop="@dimen/padding"
+            android:paddingEnd="@dimen/padding"
+            android:paddingBottom="@dimen/padding_bottom_activity"
+            tools:context=".activities.AddProductActivity">
 
-        <EditText
-            android:id="@+id/name_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/name_label"
-            android:enabled="false"
-            android:hint="Product Name"
-            android:paddingStart="@dimen/edit_text_padding"
-            android:paddingEnd="@dimen/edit_text_padding"
-            android:textColor="@color/black"
-            android:textSize="@dimen/large_text_size"
-            android:textStyle="bold"
-            tools:text="Men's Trousers(S/M/XL/XXLL)" />
+            <TextView
+                android:id="@+id/image_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Image of Product"
+                android:textSize="@dimen/small_text_size" />
 
-        <TextView
-            android:id="@+id/brand_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/name_text"
-            android:layout_marginTop="12dp"
-            android:text="Brand Name of Product"
-            android:textSize="@dimen/small_text_size" />
+            <ImageView
+                android:id="@+id/image_view"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_below="@id/image_label"
+                android:layout_marginStart="-16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="-16dp"
+                android:scaleType="fitCenter" />
 
-        <EditText
-            android:id="@+id/brand_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/brand_label"
-            android:enabled="false"
-            android:hint="Product Brand Name"
-            android:paddingStart="@dimen/edit_text_padding"
-            android:paddingEnd="@dimen/edit_text_padding"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size"
-            tools:text="Adidas" />
+            <View
+                android:id="@+id/edit_image"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_below="@id/image_label"
+                android:layout_marginStart="-16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="-16dp"
+                android:background="@color/transparent"
+                android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/price_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/brand_text"
-            android:layout_marginTop="12dp"
-            android:text="Price of Product"
-            android:textSize="@dimen/small_text_size" />
+            <TextView
+                android:id="@+id/name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_view"
+                android:layout_marginTop="16dp"
+                android:text="Title of Product"
+                android:textSize="@dimen/small_text_size" />
 
-        <EditText
-            android:id="@+id/price_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/price_label"
-            android:enabled="false"
-            android:hint="Product Price per piece"
-            android:inputType="numberDecimal"
-            android:paddingStart="@dimen/edit_text_padding"
-            android:paddingEnd="@dimen/edit_text_padding"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size"
-            tools:text="2000" />
+            <EditText
+                android:id="@+id/name_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name_label"
+                android:enabled="false"
+                android:hint="Product Name"
+                android:paddingStart="@dimen/edit_text_padding"
+                android:paddingEnd="@dimen/edit_text_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/large_text_size"
+                android:textStyle="bold"
+                tools:text="Men's Trousers(S/M/XL/XXLL)" />
 
-        <TextView
-            android:id="@+id/discount_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/price_text"
-            android:layout_marginTop="12dp"
-            android:text="Discount Offered"
-            android:textSize="@dimen/small_text_size" />
+            <TextView
+                android:id="@+id/brand_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name_text"
+                android:layout_marginTop="12dp"
+                android:text="Brand Name of Product"
+                android:textSize="@dimen/small_text_size" />
 
-        <EditText
-            android:id="@+id/discount_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/discount_label"
-            android:enabled="false"
-            android:hint="Discount in %"
-            android:inputType="numberDecimal"
-            android:paddingStart="@dimen/edit_text_padding"
-            android:paddingEnd="@dimen/edit_text_padding"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size"
-            tools:text="25.5" />
+            <EditText
+                android:id="@+id/brand_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/brand_label"
+                android:enabled="false"
+                android:hint="Product Brand Name"
+                android:paddingStart="@dimen/edit_text_padding"
+                android:paddingEnd="@dimen/edit_text_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                tools:text="Adidas" />
 
-        <TextView
-            android:id="@+id/gst_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/discount_text"
-            android:layout_marginTop="12dp"
-            android:text="GST applied"
-            android:textSize="@dimen/small_text_size" />
+            <TextView
+                android:id="@+id/price_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/brand_text"
+                android:layout_marginTop="12dp"
+                android:text="Price of Product"
+                android:textSize="@dimen/small_text_size" />
 
-        <EditText
-            android:id="@+id/gst_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/gst_label"
-            android:enabled="false"
-            android:hint="GST in %"
-            android:inputType="numberDecimal"
-            android:paddingStart="@dimen/edit_text_padding"
-            android:paddingEnd="@dimen/edit_text_padding"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size"
-            tools:text="18%" />
+            <EditText
+                android:id="@+id/price_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/price_label"
+                android:enabled="false"
+                android:hint="Product Price per piece"
+                android:inputType="numberDecimal"
+                android:paddingStart="@dimen/edit_text_padding"
+                android:paddingEnd="@dimen/edit_text_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                tools:text="2000" />
 
-        <Spinner
-            android:id="@+id/gst_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/gst_label"
-            android:entries="@array/gst_rates"
-            android:visibility="invisible" />
+            <TextView
+                android:id="@+id/discount_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/price_text"
+                android:layout_marginTop="12dp"
+                android:text="Discount Offered"
+                android:textSize="@dimen/small_text_size" />
 
-        <TextView
-            android:id="@+id/details_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/gst_spinner"
-            android:layout_marginTop="12dp"
-            android:text="Details of Product"
-            android:textSize="@dimen/small_text_size" />
+            <EditText
+                android:id="@+id/discount_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/discount_label"
+                android:enabled="false"
+                android:hint="Discount in %"
+                android:inputType="numberDecimal"
+                android:paddingStart="@dimen/edit_text_padding"
+                android:paddingEnd="@dimen/edit_text_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                tools:text="25.5" />
 
-        <EditText
-            android:id="@+id/details_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/details_label"
-            android:enabled="false"
-            android:hint="Product Details"
-            android:paddingStart="@dimen/edit_text_padding"
-            android:paddingEnd="@dimen/edit_text_padding"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size"
-            tools:text="Men's most comfortable trousers available in all sizes at cheapest prices" />
+            <TextView
+                android:id="@+id/gst_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/discount_text"
+                android:layout_marginTop="12dp"
+                android:text="GST applied"
+                android:textSize="@dimen/small_text_size" />
 
-        <TextView
-            android:id="@+id/sku_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/details_text"
-            android:layout_marginTop="12dp"
-            android:text="SKU of Product"
-            android:textSize="@dimen/small_text_size" />
+            <EditText
+                android:id="@+id/gst_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gst_label"
+                android:enabled="false"
+                android:hint="GST in %"
+                android:inputType="numberDecimal"
+                android:paddingStart="@dimen/edit_text_padding"
+                android:paddingEnd="@dimen/edit_text_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                tools:text="18%" />
 
-        <EditText
-            android:id="@+id/sku_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/sku_label"
-            android:enabled="false"
-            android:hint="SKU"
-            android:paddingStart="@dimen/edit_text_padding"
-            android:paddingEnd="@dimen/edit_text_padding"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size"
-            tools:text="AES893018UIY9KIO7" />
+            <Spinner
+                android:id="@+id/gst_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gst_label"
+                android:entries="@array/gst_rates"
+                android:visibility="invisible" />
 
-        <TextView
-            android:id="@+id/sla_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/sku_text"
-            android:layout_marginTop="12dp"
-            android:text="Procurement SLA"
-            android:textSize="@dimen/small_text_size" />
+            <TextView
+                android:id="@+id/details_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gst_spinner"
+                android:layout_marginTop="12dp"
+                android:text="Details of Product"
+                android:textSize="@dimen/small_text_size" />
 
-        <EditText
-            android:id="@+id/sla_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/sla_label"
-            android:enabled="false"
-            android:hint="SLA"
-            android:paddingStart="@dimen/edit_text_padding"
-            android:paddingEnd="@dimen/edit_text_padding"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size"
-            tools:text="AES893018UIY9KIO7" />
+            <EditText
+                android:id="@+id/details_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/details_label"
+                android:enabled="false"
+                android:hint="Product Details"
+                android:paddingStart="@dimen/edit_text_padding"
+                android:paddingEnd="@dimen/edit_text_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                tools:text="Men's most comfortable trousers available in all sizes at cheapest prices" />
 
-        <TextView
-            android:id="@+id/origin_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/sla_text"
-            android:layout_marginTop="12dp"
-            android:text="Country of Origin"
-            android:textSize="@dimen/small_text_size" />
+            <TextView
+                android:id="@+id/sku_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/details_text"
+                android:layout_marginTop="12dp"
+                android:text="SKU of Product"
+                android:textSize="@dimen/small_text_size" />
 
-        <EditText
-            android:id="@+id/origin_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/origin_label"
-            android:enabled="false"
-            android:hint="Origin Country"
-            android:paddingStart="@dimen/edit_text_padding"
-            android:paddingEnd="@dimen/edit_text_padding"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size"
-            tools:text="India" />
+            <EditText
+                android:id="@+id/sku_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sku_label"
+                android:enabled="false"
+                android:hint="SKU"
+                android:paddingStart="@dimen/edit_text_padding"
+                android:paddingEnd="@dimen/edit_text_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                tools:text="AES893018UIY9KIO7" />
 
-        <TextView
-            android:id="@+id/mname_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/origin_text"
-            android:layout_marginTop="12dp"
-            android:text="Manufacturer's Name"
-            android:textSize="@dimen/small_text_size" />
+            <TextView
+                android:id="@+id/sla_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sku_text"
+                android:layout_marginTop="12dp"
+                android:text="Procurement SLA"
+                android:textSize="@dimen/small_text_size" />
 
-        <EditText
-            android:id="@+id/mname_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/mname_label"
-            android:enabled="false"
-            android:hint="Manufacturer's Name"
-            android:paddingStart="@dimen/edit_text_padding"
-            android:paddingEnd="@dimen/edit_text_padding"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size"
-            tools:text="Anvay Tech Solutions Pvt. Ltd" />
+            <EditText
+                android:id="@+id/sla_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sla_label"
+                android:enabled="false"
+                android:hint="SLA"
+                android:paddingStart="@dimen/edit_text_padding"
+                android:paddingEnd="@dimen/edit_text_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                tools:text="AES893018UIY9KIO7" />
 
-        <TextView
-            android:id="@+id/maddress_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/mname_text"
-            android:layout_marginTop="12dp"
-            android:text="Manufacturer's Address"
-            android:textSize="@dimen/small_text_size" />
+            <TextView
+                android:id="@+id/origin_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sla_text"
+                android:layout_marginTop="12dp"
+                android:text="Country of Origin"
+                android:textSize="@dimen/small_text_size" />
 
-        <EditText
-            android:id="@+id/maddress_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/maddress_label"
-            android:enabled="false"
-            android:hint="Manufacturer's Address"
-            android:paddingStart="@dimen/edit_text_padding"
-            android:paddingEnd="@dimen/edit_text_padding"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size"
-            tools:text="Stree No. 4, Block C, Delhi" />
+            <EditText
+                android:id="@+id/origin_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/origin_label"
+                android:enabled="false"
+                android:hint="Origin Country"
+                android:paddingStart="@dimen/edit_text_padding"
+                android:paddingEnd="@dimen/edit_text_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                tools:text="India" />
 
-        <TextView
-            android:id="@+id/mcontact_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/maddress_text"
-            android:layout_marginTop="12dp"
-            android:text="Manufacturer's Contact"
-            android:textSize="@dimen/small_text_size" />
+            <TextView
+                android:id="@+id/mname_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/origin_text"
+                android:layout_marginTop="12dp"
+                android:text="Manufacturer's Name"
+                android:textSize="@dimen/small_text_size" />
 
-        <EditText
-            android:id="@+id/mcontact_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/mcontact_label"
-            android:enabled="false"
-            android:hint="Contact Number"
-            android:paddingStart="@dimen/edit_text_padding"
-            android:paddingEnd="@dimen/edit_text_padding"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size"
-            tools:text="1234567890" />
+            <EditText
+                android:id="@+id/mname_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mname_label"
+                android:enabled="false"
+                android:hint="Manufacturer's Name"
+                android:paddingStart="@dimen/edit_text_padding"
+                android:paddingEnd="@dimen/edit_text_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                tools:text="Anvay Tech Solutions Pvt. Ltd" />
 
-        <TextView
-            android:id="@+id/parent_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/mcontact_text"
-            android:layout_marginTop="12dp"
-            android:text="Parent Category"
-            android:textSize="@dimen/small_text_size" />
+            <TextView
+                android:id="@+id/maddress_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mname_text"
+                android:layout_marginTop="12dp"
+                android:text="Manufacturer's Address"
+                android:textSize="@dimen/small_text_size" />
 
-        <EditText
-            android:id="@+id/parent_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/parent_label"
-            android:enabled="false"
-            android:hint="Parent Category"
-            android:paddingStart="@dimen/edit_text_padding"
-            android:paddingEnd="@dimen/edit_text_padding"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size"
-            tools:text="Clothing" />
+            <EditText
+                android:id="@+id/maddress_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/maddress_label"
+                android:enabled="false"
+                android:hint="Manufacturer's Address"
+                android:paddingStart="@dimen/edit_text_padding"
+                android:paddingEnd="@dimen/edit_text_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                tools:text="Stree No. 4, Block C, Delhi" />
 
-        <TextView
-            android:id="@+id/child_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/parent_text"
-            android:layout_marginTop="12dp"
-            android:text="Child Category"
-            android:textSize="@dimen/small_text_size" />
+            <TextView
+                android:id="@+id/mcontact_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/maddress_text"
+                android:layout_marginTop="12dp"
+                android:text="Manufacturer's Contact"
+                android:textSize="@dimen/small_text_size" />
 
-        <EditText
-            android:id="@+id/child_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/child_label"
-            android:enabled="false"
-            android:hint="Child Category"
-            android:paddingStart="@dimen/edit_text_padding"
-            android:paddingEnd="@dimen/edit_text_padding"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size"
-            tools:text="Men's Clothing" />
+            <EditText
+                android:id="@+id/mcontact_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mcontact_label"
+                android:enabled="false"
+                android:hint="Contact Number"
+                android:paddingStart="@dimen/edit_text_padding"
+                android:paddingEnd="@dimen/edit_text_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                tools:text="1234567890" />
 
-        <TextView
-            android:id="@+id/stock_quantity_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/child_text"
-            android:layout_marginTop="12dp"
-            android:text="Stock Quantity"
-            android:textSize="@dimen/small_text_size" />
+            <TextView
+                android:id="@+id/parent_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mcontact_text"
+                android:layout_marginTop="12dp"
+                android:text="Parent Category"
+                android:textSize="@dimen/small_text_size" />
 
-        <EditText
-            android:id="@+id/stock_quantity_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/stock_quantity_label"
-            android:enabled="false"
-            android:hint="Stock Quantity"
-            android:inputType="number"
-            android:paddingStart="@dimen/edit_text_padding"
-            android:paddingEnd="@dimen/edit_text_padding"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size"
-            tools:text="400" />
+            <EditText
+                android:id="@+id/parent_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/parent_label"
+                android:enabled="false"
+                android:hint="Parent Category"
+                android:paddingStart="@dimen/edit_text_padding"
+                android:paddingEnd="@dimen/edit_text_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                tools:text="Clothing" />
 
-        <TextView
-            android:id="@+id/min_quantity_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/stock_quantity_text"
-            android:layout_marginTop="12dp"
-            android:text="Minimum Purchasable Quantity"
-            android:textSize="@dimen/small_text_size" />
+            <TextView
+                android:id="@+id/child_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/parent_text"
+                android:layout_marginTop="12dp"
+                android:text="Child Category"
+                android:textSize="@dimen/small_text_size" />
 
-        <EditText
-            android:id="@+id/min_quantity_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/min_quantity_label"
-            android:enabled="false"
-            android:hint="Minimum Quantity"
-            android:inputType="number"
-            android:paddingStart="@dimen/edit_text_padding"
-            android:paddingEnd="@dimen/edit_text_padding"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size"
-            tools:text="40" />
+            <EditText
+                android:id="@+id/child_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/child_label"
+                android:enabled="false"
+                android:hint="Child Category"
+                android:paddingStart="@dimen/edit_text_padding"
+                android:paddingEnd="@dimen/edit_text_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                tools:text="Men's Clothing" />
 
-        <TextView
-            android:id="@+id/max_quantity_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/min_quantity_text"
-            android:layout_marginTop="12dp"
-            android:text="Maximum Purchasable Quantity"
-            android:textSize="@dimen/small_text_size" />
+            <TextView
+                android:id="@+id/stock_quantity_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/child_text"
+                android:layout_marginTop="12dp"
+                android:text="Stock Quantity"
+                android:textSize="@dimen/small_text_size" />
 
-        <EditText
-            android:id="@+id/max_quantity_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/max_quantity_label"
-            android:enabled="false"
-            android:hint="Maximum Quantity"
-            android:inputType="number"
-            android:paddingStart="@dimen/edit_text_padding"
-            android:paddingEnd="@dimen/edit_text_padding"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size"
-            tools:text="100" />
+            <EditText
+                android:id="@+id/stock_quantity_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/stock_quantity_label"
+                android:enabled="false"
+                android:hint="Stock Quantity"
+                android:inputType="number"
+                android:paddingStart="@dimen/edit_text_padding"
+                android:paddingEnd="@dimen/edit_text_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                tools:text="400" />
 
-        <Button
-            android:id="@+id/edit_button"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/button_height"
-            android:layout_below="@id/max_quantity_text"
-            android:layout_marginTop="16dp"
-            android:text="Edit"
-            android:textSize="@dimen/button_text_size" />
+            <TextView
+                android:id="@+id/min_quantity_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/stock_quantity_text"
+                android:layout_marginTop="12dp"
+                android:text="Minimum Purchasable Quantity"
+                android:textSize="@dimen/small_text_size" />
 
-        <Button
-            android:id="@+id/delete_button"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/button_height"
-            android:layout_below="@id/edit_button"
-            android:layout_marginTop="16dp"
-            android:text="Delete"
-            android:textSize="@dimen/button_text_size" />
+            <EditText
+                android:id="@+id/min_quantity_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/min_quantity_label"
+                android:enabled="false"
+                android:hint="Minimum Quantity"
+                android:inputType="number"
+                android:paddingStart="@dimen/edit_text_padding"
+                android:paddingEnd="@dimen/edit_text_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                tools:text="40" />
 
-    </RelativeLayout>
-</ScrollView>
+            <TextView
+                android:id="@+id/max_quantity_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/min_quantity_text"
+                android:layout_marginTop="12dp"
+                android:text="Maximum Purchasable Quantity"
+                android:textSize="@dimen/small_text_size" />
+
+            <EditText
+                android:id="@+id/max_quantity_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/max_quantity_label"
+                android:enabled="false"
+                android:hint="Maximum Quantity"
+                android:inputType="number"
+                android:paddingStart="@dimen/edit_text_padding"
+                android:paddingEnd="@dimen/edit_text_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                tools:text="100" />
+
+            <Button
+                android:id="@+id/edit_button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_below="@id/max_quantity_text"
+                android:layout_marginTop="16dp"
+                android:text="Edit"
+                android:textSize="@dimen/button_text_size" />
+
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_below="@id/edit_button"
+                android:layout_marginTop="16dp"
+                android:text="Delete"
+                android:textSize="@dimen/button_text_size" />
+
+        </RelativeLayout>
+    </ScrollView>
+</FrameLayout>

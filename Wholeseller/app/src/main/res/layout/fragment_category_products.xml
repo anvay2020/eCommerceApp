@@ -3,10 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:clipToPadding="false"
     android:paddingStart="@dimen/padding"
     android:paddingTop="@dimen/padding"
     android:paddingEnd="@dimen/padding"
     android:paddingBottom="@dimen/padding_bottom_fragment">
+
+    <include
+        android:id="@+id/loading"
+        layout="@layout/layout_loading"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/add_new_product_button"

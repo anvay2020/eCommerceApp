@@ -1,10 +1,12 @@
+/**
+ * coded by Pawan Singh Harariya
+ */
 package com.anvay.pawan.wholeseller.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,10 +69,9 @@ public class OrdersActivity extends AppCompatActivity implements OrdersListAdapt
         ordersRecycler.setAdapter(adapter);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         assert firebaseId != null;
-        Log.e("firebaseID", firebaseId);
-        Log.e("status", status + "");
-        db.collection(Constants.ORDERS_PATH).document(firebaseId).collection(Constants.ORDERS_PATH)
-                .whereEqualTo("status", status)                                 //ToDO changes for document path
+        db.collection(Constants.ORDERS_PATH)
+                .whereEqualTo("sellerId", firebaseId)
+                .whereEqualTo("status", status)
                 .orderBy("orderTime", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -80,7 +81,6 @@ public class OrdersActivity extends AppCompatActivity implements OrdersListAdapt
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                             Order order = document.toObject(Order.class);
                             order.setOrderId(document.getId());
-                            Log.e("order", order.toString());
                             ordersList.add(order);
                         }
                         adapter.notifyDataSetChanged();
@@ -102,7 +102,6 @@ public class OrdersActivity extends AppCompatActivity implements OrdersListAdapt
                 shippingLayout.setVisibility(View.GONE);
             }
         });
-
         final EditText trackingIdText = findViewById(R.id.tracking_id_text);
         Button confirmButton = findViewById(R.id.confirm_button);
         confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -126,11 +125,8 @@ public class OrdersActivity extends AppCompatActivity implements OrdersListAdapt
 
     @Override
     public void OnOrderShipped(int position) {
-        String id = ordersList.get(position).getOrderId();
-//        Intent i = new Intent(OrdersActivity.this, ShipOrderActivity.class);
-//        i.putExtra("orderId", id);
-//        startActivity(i);
-        orderIdText.setText(id);
+        orderId = ordersList.get(position).getOrderId();
+        orderIdText.setText(orderId);
         this.position = position;
         shippingLayout.setVisibility(View.VISIBLE);
     }
@@ -143,7 +139,7 @@ public class OrdersActivity extends AppCompatActivity implements OrdersListAdapt
         data.put("status", Constants.STATUS_SHIPPED);
         db.collection(Constants.SELLER_DETAILS).document(firebaseId)
                 .update("shippedOrders", FieldValue.increment(1), "pendingOrders", FieldValue.increment(-1));
-        db.collection(Constants.ORDERS_PATH).document(firebaseId).collection(Constants.ORDERS_PATH).document(orderId)
+        db.collection(Constants.ORDERS_PATH).document(orderId)
                 .update(data)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

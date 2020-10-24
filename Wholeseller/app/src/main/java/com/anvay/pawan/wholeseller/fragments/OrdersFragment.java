@@ -19,6 +19,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.anvay.pawan.wholeseller.R;
+import com.anvay.pawan.wholeseller.activities.BankDetailsActivity;
 import com.anvay.pawan.wholeseller.activities.OrdersActivity;
 import com.anvay.pawan.wholeseller.models.SellerDetails;
 import com.anvay.pawan.wholeseller.utils.Constants;
@@ -29,9 +30,18 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class OrdersFragment extends Fragment {
     private Context context;
+    private View loading;
+    private String firebaseId;
+    private TextView totalSales, walletBalance, noPendingOrders, noCompletedOrders, noReturnedOrders, noShippedOrders;
 
     public OrdersFragment(Context context) {
         this.context = context;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadDetails();
     }
 
     @Nullable
@@ -42,41 +52,22 @@ public class OrdersFragment extends Fragment {
         final CardView returnedOrders = view.findViewById(R.id.returned_orders);
         CardView completedOrders = view.findViewById(R.id.completed_orders);
         CardView shippedOrders = view.findViewById(R.id.shipped_orders);
-        final TextView totalSales = view.findViewById(R.id.total_sales);
-        final TextView walletBalance = view.findViewById(R.id.wallet_balance);
-        final TextView noPendingOrders = view.findViewById(R.id.no_pending_orders);
-        final TextView noCompletedOrders = view.findViewById(R.id.no_completed_orders);
-        final TextView noReturnedOrders = view.findViewById(R.id.no_returned_orders);
-        final TextView noShippedOrders = view.findViewById(R.id.no_shipped_orders);
-        final View loading = view.findViewById(R.id.loading);
-        loading.setVisibility(View.VISIBLE);
+        totalSales = view.findViewById(R.id.total_sales);
+        walletBalance = view.findViewById(R.id.wallet_balance);
+        noPendingOrders = view.findViewById(R.id.no_pending_orders);
+        noCompletedOrders = view.findViewById(R.id.no_completed_orders);
+        noReturnedOrders = view.findViewById(R.id.no_returned_orders);
+        noShippedOrders = view.findViewById(R.id.no_shipped_orders);
+        TextView addBankDetails = view.findViewById(R.id.add_bank_details);
+        loading = view.findViewById(R.id.loading);
         SharedPreferences sharedPreferences = context.getSharedPreferences("app", Context.MODE_PRIVATE);
-        String firebaseId = sharedPreferences.getString(Constants.FIREBASE_ID, null);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        assert firebaseId != null;
-        db.collection(Constants.SELLER_DETAILS).document(firebaseId)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        SellerDetails sellerDetails = documentSnapshot.toObject(SellerDetails.class);
-                        assert sellerDetails != null;
-                        totalSales.setText(String.valueOf(sellerDetails.getTotalSales()));
-                        walletBalance.setText(String.valueOf(sellerDetails.getWalletBalance()));
-                        noPendingOrders.setText(String.valueOf(sellerDetails.getPendingOrders()));
-                        noCompletedOrders.setText(String.valueOf(sellerDetails.getCompletedOrders()));
-                        noReturnedOrders.setText(String.valueOf(sellerDetails.getReturnedOrders()));
-                        noShippedOrders.setText(String.valueOf(sellerDetails.getShippedOrders()));
-                        loading.setVisibility(View.GONE);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        loading.setVisibility(View.GONE);
-                        Toast.makeText(context, "Error fetching orders", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        firebaseId = sharedPreferences.getString(Constants.FIREBASE_ID, null);
+        boolean bankDetailsExist = sharedPreferences.getBoolean(Constants.BANK_DETAILS_STATUS, false);
+        if (bankDetailsExist)
+            addBankDetails.setVisibility(View.GONE);
+        else
+            addBankDetails.setVisibility(View.VISIBLE);
+        loadDetails();
         pendingOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,6 +100,41 @@ public class OrdersFragment extends Fragment {
                 startActivity(i);
             }
         });
+        addBankDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, BankDetailsActivity.class);
+                startActivity(i);
+            }
+        });
         return view;
+    }
+
+    private void loadDetails() {
+        loading.setVisibility(View.VISIBLE);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection(Constants.SELLER_DETAILS).document(firebaseId)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        SellerDetails sellerDetails = documentSnapshot.toObject(SellerDetails.class);
+                        assert sellerDetails != null;
+                        totalSales.setText(String.valueOf(sellerDetails.getTotalSales()));
+                        walletBalance.setText(String.valueOf(sellerDetails.getWalletBalance()));
+                        noPendingOrders.setText(String.valueOf(sellerDetails.getPendingOrders()));
+                        noCompletedOrders.setText(String.valueOf(sellerDetails.getCompletedOrders()));
+                        noReturnedOrders.setText(String.valueOf(sellerDetails.getReturnedOrders()));
+                        noShippedOrders.setText(String.valueOf(sellerDetails.getShippedOrders()));
+                        loading.setVisibility(View.GONE);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        loading.setVisibility(View.GONE);
+                        Toast.makeText(context, "Error fetching orders", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

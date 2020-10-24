@@ -37,6 +37,16 @@ import java.util.ArrayList;
 public class CategoryProductsFragment extends Fragment implements ProductsListAdapter.ProductsClickListener {
     private Context context;
     private ArrayList<Product> productList;
+    private String firebaseId, category;
+    private TextView emptyTextView;
+    private View loading;
+    private ProductsListAdapter adapter;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadProducts();
+    }
 
     public CategoryProductsFragment(Context context) {
         this.context = context;
@@ -49,15 +59,30 @@ public class CategoryProductsFragment extends Fragment implements ProductsListAd
         productList = new ArrayList<>();
         assert getArguments() != null;
         SharedPreferences sharedPreferences = context.getSharedPreferences("app", Context.MODE_PRIVATE);
-        String firebaseId = sharedPreferences.getString(Constants.FIREBASE_ID, null);
-        final String category = getArguments().getString(Constants.CATEGORY_KEY);
+        firebaseId = sharedPreferences.getString(Constants.FIREBASE_ID, null);
+        category = getArguments().getString(Constants.CATEGORY_KEY);
         Button addNewProductButton = view.findViewById(R.id.add_new_product_button);
-        final TextView emptyTextView = view.findViewById(R.id.empty_text_view);
+        emptyTextView = view.findViewById(R.id.empty_text_view);
+        loading = view.findViewById(R.id.loading);
         RecyclerView previousProductsRecycler = view.findViewById(R.id.previous_products_recycler);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
-        final ProductsListAdapter adapter = new ProductsListAdapter(context, productList, this);
+        adapter = new ProductsListAdapter(context, productList, this);
         previousProductsRecycler.setLayoutManager(layoutManager);
         previousProductsRecycler.setAdapter(adapter);
+        loadProducts();
+        addNewProductButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, AddProductActivity.class);
+                i.putExtra(Constants.CATEGORY_KEY, category);
+                startActivity(i);
+            }
+        });
+        return view;
+    }
+
+    private void loadProducts() {
+        loading.setVisibility(View.VISIBLE);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection(Constants.PRODUCTS_PATH + "/" + category)
                 .whereEqualTo("ownerId", firebaseId)
@@ -74,23 +99,16 @@ public class CategoryProductsFragment extends Fragment implements ProductsListAd
                         if (adapter.getItemCount() == 0)
                             emptyTextView.setVisibility(View.VISIBLE);
                         else emptyTextView.setVisibility(View.INVISIBLE);
+                        loading.setVisibility(View.GONE);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(context, "Error getting data", Toast.LENGTH_SHORT).show();
+                        loading.setVisibility(View.GONE);
                     }
                 });
-        addNewProductButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(context, AddProductActivity.class);
-                i.putExtra(Constants.CATEGORY_KEY, category);
-                startActivity(i);
-            }
-        });
-        return view;
     }
 
     @Override

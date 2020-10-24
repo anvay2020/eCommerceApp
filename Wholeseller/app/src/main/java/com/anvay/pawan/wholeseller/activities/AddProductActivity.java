@@ -50,7 +50,7 @@ public class AddProductActivity extends AppCompatActivity {
     private final int CAMERA = 8001;
     private Button addProductButton;
     private Bitmap newImage;
-    private View addImage;
+    private View addImage, loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,14 +90,12 @@ public class AddProductActivity extends AppCompatActivity {
                     minQuantity = Integer.parseInt(productMinQ);
                     maxQuantity = Integer.parseInt(productMaxQ);
                     stockQuantity = Integer.parseInt(productStockQ);
-
                     String productDiscount = discountText.getText().toString();
                     if (!TextUtils.isEmpty(productDiscount))
                         discount = Double.parseDouble(productDiscount);
                     mContact = mContactText.getText().toString();
                     parentCat = parentText.getText().toString();
                     childCat = childText.getText().toString();
-
                     saveImage();
                 }
             }
@@ -173,6 +171,7 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     private void saveImage() {
+        loading.setVisibility(View.VISIBLE);
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
         StorageReference spaceRef = storageReference.child(firebaseId);
@@ -194,6 +193,7 @@ public class AddProductActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(AddProductActivity.this, "Upload Failed", Toast.LENGTH_LONG).show();
+                        loading.setVisibility(View.GONE);
                     }
                 });
             }
@@ -201,6 +201,7 @@ public class AddProductActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(AddProductActivity.this, "Upload Failed" + e.getMessage() + e.getCause(), Toast.LENGTH_LONG).show();
+                loading.setVisibility(View.GONE);
             }
         });
     }
@@ -221,6 +222,7 @@ public class AddProductActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(AddProductActivity.this, "Error uploading data", Toast.LENGTH_SHORT).show();
+                        loading.setVisibility(View.GONE);
                     }
                 });
     }
@@ -247,5 +249,6 @@ public class AddProductActivity extends AppCompatActivity {
         imageView = findViewById(R.id.image_view);
         addImage = findViewById(R.id.add_image);
         addProductButton = findViewById(R.id.add_product_button);
+        loading = findViewById(R.id.loading);
     }
 }

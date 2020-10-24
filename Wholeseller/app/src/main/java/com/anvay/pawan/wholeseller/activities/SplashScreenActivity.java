@@ -30,3 +30,5 @@ public class SplashScreenActivity extends AppCompatActivity {
         }, SPLASH_DISPLAY_LENGTH);
     }
 }
+//all todos lists here
+//TODO change firebase rules for firestore and storage

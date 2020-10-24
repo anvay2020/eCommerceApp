@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:letterSpacing="0.1"
-        android:text="Your Complaints"
+        android:text="Complaints Received"
         android:textAllCaps="true"
         android:textColor="@color/black"
         android:textSize="@dimen/large_text_size"
